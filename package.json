@@ -1,0 +1,26 @@
+{
+  "name": "tianhe",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/suyu0925/tianhe.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/suyu0925/tianhe/issues"
+  },
+  "homepage": "https://github.com/suyu0925/tianhe#readme",
+  "dependencies": {
+    "body-parser": "^1.14.2",
+    "compression": "^1.6.0",
+    "connect-mongo": "^1.0.2",
+    "express": "^4.13.3",
+    "mongodb": "^2.0.52"
+  }
+}
