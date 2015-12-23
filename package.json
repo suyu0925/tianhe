@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/suyu0925/tianhe#readme",
   "dependencies": {
+    "async": "^1.5.0",
     "body-parser": "^1.14.2",
     "compression": "^1.6.0",
     "connect-mongo": "^1.0.2",
