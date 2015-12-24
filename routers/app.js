@@ -88,4 +88,24 @@ router.get('/appphoneverification.app', function (req, res) {
     });
 });
 
+/**
+ * 更改密码
+ */
+router.get('/appupass.app', function (req, res) {
+    var password = req.query.npwd;
+    var phone = req.query.mobilePhone;
+    api.upass({
+        phone: phone,
+        password: password
+    }, function (err, data) {
+        if (err) {
+            utility.jsonError(res, err.message);
+        } else {
+            var msg = data.msg;
+            delete data.msg;
+            utility.jsonOk(res, msg, data);
+        }
+    });
+});
+
 module.exports = router;

@@ -75,4 +75,26 @@ dbHelper.findOne = function (collection, query, callback) {
     });
 };
 
+/**
+ * 按条件修改一条数据
+ * @param collection
+ * @param query
+ * @param operation
+ * @param callback
+ */
+dbHelper.updateOne = function (collection, query, operation, callback) {
+    MongoClient.connect(config.dbUrl, function (err, db) {
+        if (err) {
+            callback(err);
+            return;
+        }
+
+        db.collection(collection).updateOne(query, operation, function (err, result) {
+            db.close();
+
+            callback(err, result);
+        });
+    });
+};
+
 module.exports = dbHelper;
