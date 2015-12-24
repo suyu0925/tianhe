@@ -14,7 +14,7 @@ router.get('/appregistercwp.app', function (req, res) {
         phone: mobilePhone,
         password: pwd,
         type: 'carrier'
-    }, function(err, data){
+    }, function (err, data) {
         if (err) {
             utility.jsonError(res, err.message);
         } else {
@@ -37,7 +37,7 @@ router.get('/appregisterewp.app', function (req, res) {
         phone: mobilePhone,
         password: pwd,
         type: 'shipper'
-    }, function(err, data){
+    }, function (err, data) {
         if (err) {
             utility.jsonError(res, err.message);
         } else {
@@ -57,7 +57,7 @@ router.get('/applogin.app', function (req, res) {
     api.login({
         username: userName,
         password: pwd
-    }, function(err, data){
+    }, function (err, data) {
         if (err) {
             utility.jsonError(res, err.message);
         } else {
@@ -71,5 +71,21 @@ router.get('/applogin.app', function (req, res) {
 /**
  * 获取短信验证码
  */
+router.get('/appphoneverification.app', function (req, res) {
+    var phone = req.query.mobilePhone;
+    var type = req.query.businessType;
+    api.phoneverification({
+        phone: phone,
+        type: type
+    }, function (err, data) {
+        if (err) {
+            utility.jsonError(res, err.message);
+        } else {
+            var msg = data.msg;
+            delete data.msg;
+            utility.jsonOk(res, msg, data);
+        }
+    });
+});
 
 module.exports = router;
