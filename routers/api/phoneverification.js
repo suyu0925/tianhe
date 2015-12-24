@@ -26,6 +26,8 @@ function checkPhone(phone, callback) {
 /**
  * 获取手机短信验证码
  * @param data
+ * data.phone {string}
+ * data.type {number} 0或者1
  * @param callback
  */
 module.exports = function (data, callback) {

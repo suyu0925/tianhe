@@ -1,6 +1,6 @@
-var async = require('async');
 var alchemy = require('../../alchemy');
 var dbHelper = require('../../dbHelper');
+var config = require('../../config.json');
 
 var collectionName = 'user';
 
@@ -23,16 +23,25 @@ function checkUsername(username, callback) {
     });
 }
 
+/**
+ * 登录
+ * @param data
+ * data.username {string} 加密数据
+ * data.password {string} 加密数据
+ * @param callback
+ */
 module.exports = function (data, callback) {
     if (!data.username) {
         callback(new Error('用户名为空'));
         return;
     } else {
-        try {
-            //data.username = alchemy.decrypt(data.username);
-        } catch (e) {
-            callback(new Error('用户名解析错误'));
-            return;
+        if (config.alchemy) {
+            try {
+                data.username = alchemy.decrypt(data.username);
+            } catch (e) {
+                callback(new Error('用户名解析错误'));
+                return;
+            }
         }
     }
 
@@ -40,11 +49,13 @@ module.exports = function (data, callback) {
         callback(new Error('密码为空'));
         return;
     } else {
-        try {
-            //data.password = alchemy.decrypt(data.password);
-        } catch (e) {
-            callback(new Error('密码解析错误'));
-            return;
+        if (config.alchemy) {
+            try {
+                data.password = alchemy.decrypt(data.password);
+            } catch (e) {
+                callback(new Error('密码解析错误'));
+                return;
+            }
         }
     }
 

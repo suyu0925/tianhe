@@ -1,6 +1,7 @@
 var alchemy = require('../../alchemy');
 var dbHelper = require('../../dbHelper');
 var async = require('async');
+var config = require('../../config.json');
 
 var collectionName = 'user';
 
@@ -40,11 +41,13 @@ module.exports = function (data, callback) {
         callback(new Error('密码为空'));
         return;
     } else {
-        try {
-            //data.password = alchemy.decrypt(data.password);
-        } catch (e) {
-            callback(new Error('密码解析错误'));
-            return;
+        if (config.alchemy) {
+            try {
+                data.password = alchemy.decrypt(data.password);
+            } catch (e) {
+                callback(new Error('密码解析错误'));
+                return;
+            }
         }
     }
 
