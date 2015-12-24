@@ -54,4 +54,25 @@ dbHelper.insertOne = function (collection, data, callback) {
     });
 };
 
+/**
+ * 找到第一个符合请求条件的数据
+ * @param collection
+ * @param query
+ * @param callback
+ */
+dbHelper.findOne = function (collection, query, callback) {
+    MongoClient.connect(config.dbUrl, function (err, db) {
+        if (err) {
+            callback(err);
+            return;
+        }
+
+        db.collection(collection).find(query).next(function (err, doc) {
+            db.close();
+
+            callback(err, doc);
+        });
+    });
+};
+
 module.exports = dbHelper;

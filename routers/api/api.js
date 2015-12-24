@@ -4,6 +4,8 @@ api.registercwp = require('./registercwp');
 
 api.registerewp = require('./registerewp');
 
-api.applogin = require('./applogin');
+api.login = require('./login');
+
+api.phoneverification = require('./phoneverification');
 
 module.exports = api;

@@ -2,7 +2,9 @@ var router = require('express').Router();
 var utility = require('../utility');
 var api = require('./api/api.js');
 
-// 承运商（司机）注册
+/**
+ * 承运商（司机）注册
+ */
 router.get('/appregistercwp.app', function (req, res) {
     var userName = req.query.userName;
     var mobilePhone = req.query.mobilePhone;
@@ -10,7 +12,8 @@ router.get('/appregistercwp.app', function (req, res) {
     api.registercwp({
         username: userName,
         phone: mobilePhone,
-        password: pwd
+        password: pwd,
+        type: 'carrier'
     }, function(err, data){
         if (err) {
             utility.jsonError(res, err.message);
@@ -22,7 +25,9 @@ router.get('/appregistercwp.app', function (req, res) {
     });
 });
 
-// 货主注册
+/**
+ * 货主注册
+ */
 router.get('/appregisterewp.app', function (req, res) {
     var userName = req.query.userName;
     var mobilePhone = req.query.mobilePhone;
@@ -30,7 +35,8 @@ router.get('/appregisterewp.app', function (req, res) {
     api.registerewp({
         username: userName,
         phone: mobilePhone,
-        password: pwd
+        password: pwd,
+        type: 'shipper'
     }, function(err, data){
         if (err) {
             utility.jsonError(res, err.message);
@@ -42,11 +48,13 @@ router.get('/appregisterewp.app', function (req, res) {
     });
 });
 
-// 登录
+/**
+ * 登录
+ */
 router.get('/applogin.app', function (req, res) {
     var userName = req.query.userName;
     var pwd = req.query.pwd;
-    api.applogin({
+    api.login({
         username: userName,
         password: pwd
     }, function(err, data){
@@ -59,5 +67,9 @@ router.get('/applogin.app', function (req, res) {
         }
     });
 });
+
+/**
+ * 获取短信验证码
+ */
 
 module.exports = router;

@@ -2,13 +2,15 @@ var async = require('async');
 var alchemy = require('../../alchemy');
 var dbHelper = require('../../dbHelper');
 
+var collectionName = 'user';
+
 /**
  * 检查用户是否已经存在
  * @param username
  * @param callback
  */
 function checkUsername(username, callback) {
-    dbHelper.isExisted('ewp', {username: username}, function (err, existed) {
+    dbHelper.isExisted(collectionName, {username: username}, function (err, existed) {
         if (err) {
             callback(new Error('数据库连接失败'));
         } else {
@@ -27,7 +29,7 @@ function checkUsername(username, callback) {
  * @param callback
  */
 function checkPhone(phone, callback) {
-    dbHelper.isExisted('ewp', {phone: phone}, function (err, existed) {
+    dbHelper.isExisted(collectionName, {phone: phone}, function (err, existed) {
         if (err) {
             callback(new Error('数据库连接失败'));
         } else {
@@ -46,7 +48,7 @@ function checkPhone(phone, callback) {
  * @param callback
  */
 function createAccount(data, callback) {
-    dbHelper.insertOne('ewp', data, function (err, doc) {
+    dbHelper.insertOne(collectionName, data, function (err, doc) {
         callback(err);
     });
 }
