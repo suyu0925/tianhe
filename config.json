@@ -1,4 +1,4 @@
 {
   "dbUrl": "mongodb://localhost:27017/tianhe",
-  "alchemy": false
+  "alchemy": true
 }
