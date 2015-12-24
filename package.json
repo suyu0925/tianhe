@@ -22,6 +22,8 @@
     "compression": "^1.6.0",
     "connect-mongo": "^1.0.2",
     "express": "^4.13.3",
-    "mongodb": "^2.0.52"
+    "mongodb": "^2.0.52",
+    "request": "^2.67.0",
+    "urlencode": "^1.1.0"
   }
 }

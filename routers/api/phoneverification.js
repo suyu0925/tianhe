@@ -1,6 +1,7 @@
 var async = require('async');
 var dbHelper = require('../../dbHelper');
 var utility = require('../../utility');
+var sms = require('../../sms');
 
 var collectionName = 'user';
 
@@ -65,9 +66,23 @@ module.exports = function (data, callback) {
                     callback();
                 }
             },
-            // 返回结果
-            function (callback) {
+            // 发送短信
+            function(callback){
                 var code = utility.getRandomString(6, 'number');
+                var options = {
+                    phone: data.phone,
+                    content: code
+                };
+                if (data.type === 1) {
+                    options.type = 'upass';
+                } else if (data.type === 0) {
+                    options.type = 'register';
+                }
+                sms.send(options);
+                callback(null, code);
+            },
+            // 返回结果
+            function (code, callback) {
                 callback(null, {
                     msg: '验证码获取成功',
                     verificationcode: code
