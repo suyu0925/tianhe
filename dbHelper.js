@@ -1,0 +1,57 @@
+var MongoClient = require('mongodb').MongoClient;
+var config = require('./config.json');
+
+var dbHelper = {};
+
+/**
+ * 判断是否已经存在数据
+ * @param collection
+ * @param query
+ * @param callback
+ */
+dbHelper.isExisted = function (collection, query, callback) {
+    MongoClient.connect(config.dbUrl, function (err, db) {
+        if (err) {
+            callback(err);
+            return;
+        }
+
+        db.collection(collection).find(query).count(function (err, count) {
+            db.close();
+
+            if (err) {
+                callback(err);
+                return;
+            }
+
+            if (count == 0) {
+                callback(null, false);
+            } else {
+                callback(null, true);
+            }
+        });
+    });
+};
+
+/**
+ * 新增一条数据
+ * @param collection
+ * @param data
+ * @param callback
+ */
+dbHelper.insertOne = function (collection, data, callback) {
+    MongoClient.connect(config.dbUrl, function (err, db) {
+        if (err) {
+            callback(err);
+            return;
+        }
+
+        db.collection(collection).insertOne(data, function (err, doc) {
+            db.close();
+
+            callback(err, doc);
+        });
+    });
+};
+
+module.exports = dbHelper;

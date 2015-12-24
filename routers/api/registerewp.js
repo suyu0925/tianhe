@@ -8,7 +8,7 @@ var dbHelper = require('../../dbHelper');
  * @param callback
  */
 function checkUsername(username, callback) {
-    dbHelper.isExisted('cwp', {username: username}, function (err, existed) {
+    dbHelper.isExisted('ewp', {username: username}, function (err, existed) {
         if (err) {
             callback(new Error('数据库连接失败'));
         } else {
@@ -27,7 +27,7 @@ function checkUsername(username, callback) {
  * @param callback
  */
 function checkPhone(phone, callback) {
-    dbHelper.isExisted('cwp', {phone: phone}, function (err, existed) {
+    dbHelper.isExisted('ewp', {phone: phone}, function (err, existed) {
         if (err) {
             callback(new Error('数据库连接失败'));
         } else {
@@ -46,7 +46,7 @@ function checkPhone(phone, callback) {
  * @param callback
  */
 function createAccount(data, callback) {
-    dbHelper.insertOne('cwp', data, function (err, doc) {
+    dbHelper.insertOne('ewp', data, function (err, doc) {
         callback(err);
     });
 }

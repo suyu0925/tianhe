@@ -22,4 +22,42 @@ router.get('/appregistercwp.app', function (req, res) {
     });
 });
 
+// 货主注册
+router.get('/appregisterewp.app', function (req, res) {
+    var userName = req.query.userName;
+    var mobilePhone = req.query.mobilePhone;
+    var pwd = req.query.pwd;
+    api.registerewp({
+        username: userName,
+        phone: mobilePhone,
+        password: pwd
+    }, function(err, data){
+        if (err) {
+            utility.jsonError(res, err.message);
+        } else {
+            var msg = data.msg;
+            delete data.msg;
+            utility.jsonOk(res, msg, data);
+        }
+    });
+});
+
+// 登录
+router.get('/applogin.app', function (req, res) {
+    var userName = req.query.userName;
+    var pwd = req.query.pwd;
+    api.applogin({
+        username: userName,
+        password: pwd
+    }, function(err, data){
+        if (err) {
+            utility.jsonError(res, err.message);
+        } else {
+            var msg = data.msg;
+            delete data.msg;
+            utility.jsonOk(res, msg, data);
+        }
+    });
+});
+
 module.exports = router;
